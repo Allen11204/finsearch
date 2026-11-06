@@ -1,0 +1,54 @@
+$ python rerank.py "Did medical costs increase in 2023?"
+Query: Did medical costs increase in 2023?
+===== Hybrid top 5 (RRF score) =====
+0.0320 | UNH_2023_Item7_034 | the estimated potential impact on our medical costs payable estimates for the mo
+0.0313 | UNH_2023_Item7_033 | payable estimates for the most recent two months. Medical cost trend factors are
+0.0307 | UNH_2023_Item7_030 | the health care professional and type of service, the typical billing lag for se
+0.0301 | UNH_2023_Item7_009 | PERFORMANCE ITEMS The following represents a summary of select 2023 year-over-ye
+0.0299 | UNH_2023_Item7_007 | additional information regarding regulatory trends and uncertainties, see Part I
+===== Reranked top 5 (rerank_score) =====
+  7.716 | UNH_2023_Item7_034 | the estimated potential impact on our medical costs payable estimates for the mo
+  7.387 | UNH_2023_Item7_030 | the health care professional and type of service, the typical billing lag for se
+  5.615 | UNH_2023_Item7_004 | Medicaid margin percentages. We continue to take a prudent, market-sustainable p
+  4.891 | UNH_2023_Item7_032 | date of service to claim receipt, claim levels and processing cycles, as well as
+  4.442 | UNH_2023_Item7_035 | 2023 net earnings would have increased or decreased by approximately $245 millio
+
+$ python rag.py "Why did medical costs increase in 2023?"
+Question: Why did medical costs increase in 2023?
+===== Answer =====
+The medical costs increased in 2023 primarily due to increased care patterns, particularly related to outpatient procedures for seniors, which were observed during 2023 and are expected to persist throughout 2024, potentially continuing in future periods [3].
+===== Cited passages =====
+[3] UNH_2023_Item7_004 | Medicaid margin percentages. We continue to take a prudent, market-sustainable p
+Invalid citations: none
+Generation time: 11.8s
+
+$ python rag.py "What risks does UnitedHealth face from regulation?"
+Question: What risks does UnitedHealth face from regulation?
+===== Answer =====
+UnitedHealthcare faces several risks from regulation, including:
+
+1. New laws, regulations, and rules, or changes in the interpretation of existing laws, regulations, and rules, including as a result of changes in the political environment, could adversely affect our businesses [1].
+
+2. Government investigations, audits, reviews, and assessments could lead to government actions, which have resulted and in future periods could result in adverse publicity, the assessment of damages, civil or criminal fines or penalties, or other sanctions, including restrictions or changes in the way we conduct business, loss of licensure or exclusion from participation in government programs, any of which could have a material adverse effect on our business, results of operations, financial position and cash flows [3].
+
+3. Our businesses are subject to comprehensive U.S. federal and state and international laws and regulations. We are regulated by agencies which generally have discretion to issue regulations and interpret and enforce laws and rules [1].
+
+4. Our businesses are also subject to laws and regulations relating to consumer protection, anti-fraud and abuse, anti-kickbacks, false claims, prohibited referrals, inappropriate reduction or limitation of health care services, anti-money laundering, securities and antitrust compliance [4].
+
+5. State health care anti-fraud and abuse prohibitions encompass a wide range of activities, including kickbacks for referral of members, billing for unnecessary medical services and improper marketing [4].
+===== Cited passages =====
+[1] UNH_2023_Item1_020 | designed to address the complex needs of the populations they serve, including t
+[3] UNH_2023_Item1A_055 | Such investigations, audits, reviews or assessments sometimes arise out of, or p
+[4] UNH_2023_Item1_022 | performance to determine our compliance with CMS contracts and regulations and t
+Invalid citations: none
+Generation time: 24.3s
+
+$ python rag.py "What was Apple's revenue in 2023?"
+Question: What was Apple's revenue in 2023?
+===== Answer =====
+I couldn't find this in the filings.
+===== Cited passages =====
+(none)
+Invalid citations: none
+Generation time: 14.6s
+
