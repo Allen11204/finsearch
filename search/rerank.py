@@ -1,23 +1,14 @@
 import sys
 
-from sentence_transformers import CrossEncoder
-
-from search import hybrid_search
-
-# Cross-encoder: reads query and passage together in one forward pass and outputs one relevance score.
-# ~90MB, downloaded to ~/.cache/huggingface on first run; max input 512 tokens (query + 200-word chunk fits).
-RERANK_MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+from models.cross_encoder import score_pairs
+from search.retrieval import hybrid_search
 
 CANDIDATES = 50   # how many hybrid results the cross-encoder re-scores
-TOP_K = 5         # how many survive; rag.py sends exactly these 5 to the LLM
-
-# Loaded once when the module is imported (~1-2s), then reused for every query.
-# rag.py imports this module, so it also gets the already-loaded model.
-_model = CrossEncoder(RERANK_MODEL_NAME)
+TOP_K = 5         # how many survive; rag/answer.py sends exactly these 5 to the LLM
 
 
 def rerank(query, passages, top_k=TOP_K):
-    # passages: list of dicts from search.py, e.g.
+    # passages: list of dicts from search/retrieval.py, e.g.
     #   [{"id": "UNH_2023_Item7_034", "section": "Item 7", "text": "the estimated potential impact ...",
     #     "score": 0.0315, "company": "UnitedHealth", "ticker": "UNH", "year": 2023}, ...]
     if not passages:
@@ -28,9 +19,8 @@ def rerank(query, passages, top_k=TOP_K):
     pairs = [(query, p["text"]) for p in passages]
 
     # [c] Score: one raw score per pair, aligned by position with `pairs` and `passages`
-    #   array([ 6.82, -3.15, 2.40, ...])   shape (50,)
-    # Raw scores can be negative and have no fixed range: compare them only within one query.
-    scores = _model.predict(pairs)
+    #   array([ 6.82, -3.15, 2.40, ...])   shape (50,)  (see models/cross_encoder.py)
+    scores = score_pairs(pairs)
 
     # Copy each dict (so the caller's list is not mutated) and attach its score.
     # float(): numpy float32 -> Python float, so the result can be printed / JSON-serialized later.

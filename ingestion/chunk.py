@@ -1,5 +1,7 @@
 import json
 
+from config import CHUNKS_DIR, TEXT_DIR
+
 CHUNK_SIZE = 200   # words per chunk
 OVERLAP = 50       # words shared by adjacent chunks
 
@@ -21,7 +23,7 @@ def chunk_text(text):
 
 
 if __name__ == "__main__":
-    with open("data/text/UNH_2023_sections.json", encoding="utf-8") as f:
+    with open(TEXT_DIR / "UNH_2023_sections.json", encoding="utf-8") as f:
         sections = json.load(f)
 
     records = []
@@ -38,7 +40,8 @@ if __name__ == "__main__":
             })
         print(f"{section}: {len(chunks)} chunks")
 
-    with open("data/chunks/UNH_2023_chunks.json", "w", encoding="utf-8") as f:
+    CHUNKS_DIR.mkdir(parents=True, exist_ok=True)
+    with open(CHUNKS_DIR / "UNH_2023_chunks.json", "w", encoding="utf-8") as f:
         json.dump(records, f, ensure_ascii=False, indent=2)
 
     print("Total:", len(records), "chunks")

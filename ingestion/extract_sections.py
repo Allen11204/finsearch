@@ -1,6 +1,8 @@
 import json
 import re
 
+from config import TEXT_DIR
+
 # Decision A2: which sections to keep. Each maps to (start heading regex, end heading regex).
 # \s+ instead of a single space: the filing writes "ITEM  1." with two spaces.
 SECTIONS = {
@@ -40,7 +42,7 @@ def extract_sections(text):
 
 
 if __name__ == "__main__":
-    with open("data/text/UNH_2023_10K.txt", encoding="utf-8") as f:
+    with open(TEXT_DIR / "UNH_2023_10K.txt", encoding="utf-8") as f:
         text = f.read()
 
     sections = extract_sections(text)
@@ -48,5 +50,5 @@ if __name__ == "__main__":
     for name, content in sections.items():
         print(f"{name}: {len(content)} characters | starts with: {content[:60]!r}")
 
-    with open("data/text/UNH_2023_sections.json", "w", encoding="utf-8") as f:
+    with open(TEXT_DIR / "UNH_2023_sections.json", "w", encoding="utf-8") as f:
         json.dump(sections, f, ensure_ascii=False, indent=2)

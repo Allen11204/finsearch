@@ -1,10 +1,7 @@
-from opensearchpy import OpenSearch
+from config import INDEX_NAME, get_client
+from models.embeddings import DIMENSION
 
-from embeddings import DIMENSION
-
-client = OpenSearch(hosts=[{"host": "localhost", "port": 9200}])
-
-INDEX_NAME = "filings"
+client = get_client()
 
 mapping = {
     "settings": {

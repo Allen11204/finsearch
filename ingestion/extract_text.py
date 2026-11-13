@@ -1,7 +1,9 @@
 from bs4 import BeautifulSoup
 
+from config import RAW_DIR, TEXT_DIR
+
 # 1. Read the HTML
-with open("data/raw/UNH_2023_10K.htm", encoding="utf-8") as f:
+with open(RAW_DIR / "UNH_2023_10K.htm", encoding="utf-8") as f:
     html = f.read()
 
 soup = BeautifulSoup(html, "html.parser")
@@ -20,7 +22,8 @@ lines = [line for line in lines if line]
 text = "\n".join(lines)
 
 # 5. Save as txt
-with open("data/text/UNH_2023_10K.txt", "w", encoding="utf-8") as f:
+TEXT_DIR.mkdir(parents=True, exist_ok=True)
+with open(TEXT_DIR / "UNH_2023_10K.txt", "w", encoding="utf-8") as f:
     f.write(text)
 
 print("Characters:", len(text))

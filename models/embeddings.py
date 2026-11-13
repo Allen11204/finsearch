@@ -1,7 +1,8 @@
 from sentence_transformers import SentenceTransformer
 
+from config import EMBEDDING_MODEL
+
 # 384-dim English model; max input is 512 tokens, so a 200-word chunk fits without truncation
-MODEL_NAME = "BAAI/bge-small-en-v1.5"
 DIMENSION = 384
 
 # bge models expect this prefix on queries (not on passages) for retrieval
@@ -14,7 +15,7 @@ def get_model():
     # Load once and reuse: loading takes seconds, encoding a query takes milliseconds
     global _model
     if _model is None:
-        _model = SentenceTransformer(MODEL_NAME)
+        _model = SentenceTransformer(EMBEDDING_MODEL)
     return _model
 
 

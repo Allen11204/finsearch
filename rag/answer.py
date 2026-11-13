@@ -4,10 +4,10 @@ import time
 
 import ollama
 
-from rerank import search_with_rerank
+from config import LLM_MODEL
+from search.rerank import search_with_rerank
 
-# Local model served by Ollama (http://localhost:11434). qwen3:4b if 8B is too slow.
-LLM_MODEL = "qwen3:8b"
+# LLM_MODEL (config.py) is served by Ollama at http://localhost:11434
 TOP_K = 5   # passages sent to the LLM; citations [1]..[5] are valid
 
 # Rules live in the system prompt: models follow system rules more reliably than rules mixed into the user turn.

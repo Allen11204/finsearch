@@ -1,12 +1,9 @@
 import sys
 
-from opensearchpy import OpenSearch
+from config import INDEX_NAME, get_client
+from models.embeddings import embed_query
 
-from embeddings import embed_query
-
-client = OpenSearch(hosts=[{"host": "localhost", "port": 9200}])
-
-INDEX_NAME = "filings"
+client = get_client()
 RRF_K = 60   # the 60 in the RRF formula 1 / (k + rank)
 
 

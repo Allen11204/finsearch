@@ -1,14 +1,13 @@
 import json
 
-from opensearchpy import OpenSearch, helpers
+from opensearchpy import helpers
 
-from embeddings import embed_passages
+from config import CHUNKS_DIR, INDEX_NAME, get_client
+from models.embeddings import embed_passages
 
-client = OpenSearch(hosts=[{"host": "localhost", "port": 9200}])
+client = get_client()
 
-INDEX_NAME = "filings"
-
-with open("data/chunks/UNH_2023_chunks.json", encoding="utf-8") as f:
+with open(CHUNKS_DIR / "UNH_2023_chunks.json", encoding="utf-8") as f:
     records = json.load(f)
 
 # Embed all chunks in one batch call, much faster than one call per chunk
