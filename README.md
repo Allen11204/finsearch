@@ -115,7 +115,7 @@ flowchart TB
     end
     subgraph A["Allen: core pipeline + integration"]
         A1["Ingestion + indexing"]
-        A2["search.py / rerank.py / rag.py"]
+        A2["search/ + rag/"]
         A3["Docker Compose + deployment"]
     end
     subgraph C["Chris: API + frontend"]

@@ -57,6 +57,7 @@ OpenSearch must be up (`docker compose up -d`); `rag.answer` also needs `ollama 
 - After changing ingestion, indexing, or search code, rerun the affected scripts and compare output
   with `results/mid_demo_runs.txt`.
 - All code, comments, output strings, docs, and commit messages are in English.
+- No AI attribution in commits or PRs: no `Co-Authored-By: Claude ...` trailer, no "Generated with Claude Code" line.
 
 ## Notes not in README
 
